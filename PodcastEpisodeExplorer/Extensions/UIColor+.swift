@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  UIColor+.swift
 //  PodcastEpisodeExplorer
 //
 //  Created by Oleg Abalonski on 5/22/20.
@@ -8,12 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-
+extension UIColor {
+    
+    static let pink = UIColor(named: "pink")
+    static let red = UIColor(named: "red")
 }
-
