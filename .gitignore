@@ -1,0 +1,9 @@
+*.pbxuser
+!default.pbxuser
+xcuserdata
+*.xccheckout
+DerivedData
+*.xcuserstate
+*.DS_Store
+
+Resources/Keys.plist
