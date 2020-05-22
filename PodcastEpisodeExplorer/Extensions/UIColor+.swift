@@ -10,6 +10,6 @@ import UIKit
 
 extension UIColor {
     
-    static let pink = UIColor(named: "pink")
-    static let red = UIColor(named: "red")
+    static let pink = #colorLiteral(red: 0.9877701402, green: 0.8480796218, blue: 0.8398446441, alpha: 1)
+    static let red = #colorLiteral(red: 0.9944505095, green: 0.2060118914, blue: 0.1765429974, alpha: 1)
 }
