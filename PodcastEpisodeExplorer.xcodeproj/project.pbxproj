@@ -11,6 +11,12 @@
 		7C0B86CD2478924F008DC345 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0B86CC2478924F008DC345 /* ViewController.swift */; };
 		7C0B86D224789251008DC345 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C0B86D124789251008DC345 /* Assets.xcassets */; };
 		7C0B86D524789251008DC345 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C0B86D324789251008DC345 /* LaunchScreen.storyboard */; };
+		7C0B86E524789912008DC345 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0B86E424789912008DC345 /* UIColor+.swift */; };
+		7C23E14124789E7F00A13474 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C23E14024789E7F00A13474 /* UIView+.swift */; };
+		7C23E14324789FD000A13474 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C23E14224789FD000A13474 /* HomeViewController.swift */; };
+		7C3001782478D17000F9DD0F /* PodcastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3001772478D17000F9DD0F /* PodcastTableViewCell.swift */; };
+		7C30017A2478D2E600F9DD0F /* HomeTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3001792478D2E600F9DD0F /* HomeTableHeaderView.swift */; };
+		7C30017C2479187900F9DD0F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C30017B2479187900F9DD0F /* UIImage+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +26,12 @@
 		7C0B86D124789251008DC345 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C0B86D424789251008DC345 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C0B86D624789251008DC345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C0B86E424789912008DC345 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		7C23E14024789E7F00A13474 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		7C23E14224789FD000A13474 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		7C3001772478D17000F9DD0F /* PodcastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastTableViewCell.swift; sourceTree = "<group>"; };
+		7C3001792478D2E600F9DD0F /* HomeTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableHeaderView.swift; sourceTree = "<group>"; };
+		7C30017B2479187900F9DD0F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +69,7 @@
 				7C0B86DD24789720008DC345 /* Controllers */,
 				7C0B86DE24789741008DC345 /* Views */,
 				7C0B86DF24789746008DC345 /* Models */,
+				7C0B86E3247898F6008DC345 /* Extensions */,
 			);
 			path = PodcastEpisodeExplorer;
 			sourceTree = "<group>";
@@ -75,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				7C0B86CC2478924F008DC345 /* ViewController.swift */,
+				7C23E14224789FD000A13474 /* HomeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -82,6 +96,8 @@
 		7C0B86DE24789741008DC345 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C3001772478D17000F9DD0F /* PodcastTableViewCell.swift */,
+				7C3001792478D2E600F9DD0F /* HomeTableHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -91,6 +107,16 @@
 			children = (
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		7C0B86E3247898F6008DC345 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7C0B86E424789912008DC345 /* UIColor+.swift */,
+				7C23E14024789E7F00A13474 /* UIView+.swift */,
+				7C30017B2479187900F9DD0F /* UIImage+.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,8 +189,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C23E14324789FD000A13474 /* HomeViewController.swift in Sources */,
+				7C23E14124789E7F00A13474 /* UIView+.swift in Sources */,
 				7C0B86CD2478924F008DC345 /* ViewController.swift in Sources */,
 				7C0B86C92478924F008DC345 /* AppDelegate.swift in Sources */,
+				7C3001782478D17000F9DD0F /* PodcastTableViewCell.swift in Sources */,
+				7C30017C2479187900F9DD0F /* UIImage+.swift in Sources */,
+				7C0B86E524789912008DC345 /* UIColor+.swift in Sources */,
+				7C30017A2478D2E600F9DD0F /* HomeTableHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,7 +334,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5M53C658XH;
-				INFOPLIST_FILE = PodcastEpisodeExplorer/Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,7 +352,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5M53C658XH;
-				INFOPLIST_FILE = PodcastEpisodeExplorer/Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

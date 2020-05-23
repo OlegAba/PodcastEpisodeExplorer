@@ -9,12 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    // MARK: - Internal Properties
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
+    // MARK: - View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.setGradientBackground(topColor: UIColor.white, bottomColor: UIColor.appPink)
     }
-
-
 }
-
