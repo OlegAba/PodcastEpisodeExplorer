@@ -16,6 +16,7 @@
 		7C23E14324789FD000A13474 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C23E14224789FD000A13474 /* HomeViewController.swift */; };
 		7C3001782478D17000F9DD0F /* PodcastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3001772478D17000F9DD0F /* PodcastTableViewCell.swift */; };
 		7C30017A2478D2E600F9DD0F /* HomeTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3001792478D2E600F9DD0F /* HomeTableHeaderView.swift */; };
+		7C30017C2479187900F9DD0F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C30017B2479187900F9DD0F /* UIImage+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		7C23E14224789FD000A13474 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7C3001772478D17000F9DD0F /* PodcastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastTableViewCell.swift; sourceTree = "<group>"; };
 		7C3001792478D2E600F9DD0F /* HomeTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableHeaderView.swift; sourceTree = "<group>"; };
+		7C30017B2479187900F9DD0F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			children = (
 				7C0B86E424789912008DC345 /* UIColor+.swift */,
 				7C23E14024789E7F00A13474 /* UIView+.swift */,
+				7C30017B2479187900F9DD0F /* UIImage+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				7C0B86CD2478924F008DC345 /* ViewController.swift in Sources */,
 				7C0B86C92478924F008DC345 /* AppDelegate.swift in Sources */,
 				7C3001782478D17000F9DD0F /* PodcastTableViewCell.swift in Sources */,
+				7C30017C2479187900F9DD0F /* UIImage+.swift in Sources */,
 				7C0B86E524789912008DC345 /* UIColor+.swift in Sources */,
 				7C30017A2478D2E600F9DD0F /* HomeTableHeaderView.swift in Sources */,
 			);

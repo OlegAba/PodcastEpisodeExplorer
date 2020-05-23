@@ -10,56 +10,49 @@ import UIKit
 
 class HomeViewController: ViewController {
     
-//    fileprivate lazy var podcastsTableView: UITableView = {
-//        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.register(PodcastTableViewCell.self, forCellReuseIdentifier: podcastTableViewCellID)
-//        tableView.tableHeaderView = containerView
-//        //tableView.separatorStyle = .none
-//        tableView.backgroundColor = view.backgroundColor
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
-//        return tableView
-//    }()
-//
-//    fileprivate lazy var containerView: UIView = {
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(homeTableHeaderView)
-//        return view
-//    }()
-//
+    fileprivate lazy var podcastsTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(PodcastTableViewCell.self, forCellReuseIdentifier: podcastTableViewCellID)
+        tableView.tableHeaderView = homeTableHeaderView
+        tableView.rowHeight = 140.0
+        tableView.sectionFooterHeight = 0
+        tableView.backgroundColor = view.backgroundColor
+        tableView.indicatorStyle = .black
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+
     fileprivate lazy var homeTableHeaderView: HomeTableHeaderView = {
         let homeTableHeaderView = HomeTableHeaderView()
         homeTableHeaderView.titleLabel.text = "Your Auby for the day"
         
         let date = Date()
-        let dataformatter = DateFormatter()
-        dataformatter.dateFormat = "dd/MM/yyyy"
-        let result = dataformatter.string(from: date)
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "dd/MM/yyyy"
+        let result = dateformatter.string(from: date)
         homeTableHeaderView.subtitleLabel.text = result
         
-        let fontConfig = UIImage.SymbolConfiguration(pointSize: 23.0, weight: .bold)
-        let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: fontConfig)
-        homeTableHeaderView.iconButton.setImage(shareImage, for: .normal)
-        homeTableHeaderView.iconButton.tintColor = UIColor.appRed
+        let shareIcon = UIImage(systemName: "square.and.arrow.up", withConfiguration: iconConfig)
+        homeTableHeaderView.iconButton.setImage(shareIcon, for: .normal)
+        homeTableHeaderView.iconButton.tintColor = .appRed
         
         homeTableHeaderView.textButton.setTitle("Play All", for: .normal)
         homeTableHeaderView.textButton.backgroundColor = UIColor.appRed
         
-        //homeTableHeaderView.subtitleLabel.text = result
-        //let size = homeTableHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        //homeTableHeaderView.frame = CGRect(origin: .zero, size: size)
         homeTableHeaderView.translatesAutoresizingMaskIntoConstraints = false
         return homeTableHeaderView
     }()
-//
-//    fileprivate let podcastTableViewCellID = "PodcastTableViewCellReuseIdentifier"
+
+    fileprivate let podcastTableViewCellID = "PodcastTableViewCellReuseIdentifier"
+    fileprivate var homeTableHeaderViewLastY: CGFloat = 0
+    fileprivate let iconConfig = UIImage.SymbolConfiguration(pointSize: 23.0, weight: .bold)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(homeTableHeaderView)
-        //view.addSubview(podcastsTableView)
+        setupNavigationBar()
+        view.addSubview(podcastsTableView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -67,42 +60,98 @@ class HomeViewController: ViewController {
         layoutViews()
     }
     
+    fileprivate func setupNavigationBar() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.navigationBar.barTintColor = .white
+        //navigationController?.navigationBar.shadowImage = UIColor.appPink.as1ptImage()
+        //navigationController?.preferredStatusBarStyle = .darkContent
+        
+        navigationItem.title = "Auby"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        
+        let shareBarButtonItem = UIBarButtonItem(image: .shareIcon, style: .plain, target: self, action: nil)
+        shareBarButtonItem.tintColor = .appRed
+        navigationItem.rightBarButtonItem = shareBarButtonItem
+    }
+    
     fileprivate func layoutViews() {
         
-        homeTableHeaderView.layoutMargins = UIEdgeInsets(top: view.layoutMargins.left * 2.0,
-                                                         left: view.layoutMargins.left,
-                                                         bottom: view.layoutMargins.right * 2.0,
-                                                         right: view.layoutMargins.right)
+        homeTableHeaderView.layoutMargins = UIEdgeInsets(top: view.layoutMargins.left * 2.0, left: view.layoutMargins.left, bottom: view.layoutMargins.right * 2.0, right: view.layoutMargins.right)
         
         NSLayoutConstraint.activate([
-//            podcastsTableView.topAnchor.constraint(equalTo: view.topAnchor),
-//            podcastsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//            podcastsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            podcastsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            podcastsTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            podcastsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            podcastsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            podcastsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            homeTableHeaderView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            homeTableHeaderView.topAnchor.constraint(equalTo: podcastsTableView.topAnchor),
             homeTableHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             homeTableHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+        
+        homeTableHeaderView.layoutIfNeeded()
+        podcastsTableView.tableHeaderView = homeTableHeaderView
+        
+        podcastsTableView.verticalScrollIndicatorInsets.top = homeTableHeaderView.frame.size.height
     }
 }
 
-//extension HomeViewController: UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(indexPath)
-//    }
-//}
-//
-//extension HomeViewController: UITableViewDataSource {
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: podcastTableViewCellID, for: indexPath) as? PodcastTableViewCell else { return UITableViewCell() }
-//        return cell
-//    }
-//}
+extension HomeViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let currentY = scrollView.contentOffset.y
+        let headerHeight = homeTableHeaderView.frame.size.height
+        
+        // Hidden
+        if ((homeTableHeaderViewLastY <= headerHeight) && (currentY > headerHeight)) {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            
+            //podcastsTableView.verticalScrollIndicatorInsets.top = homeTableHeaderView.frame.size.height
+        }
+        
+        // Shown
+        if ((homeTableHeaderViewLastY > headerHeight) && (currentY <= headerHeight)) {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+            
+            //podcastsTableView.verticalScrollIndicatorInsets.top = (navigationController?.navigationBar.frame.size.height ?? 0)
+        }
+        
+        homeTableHeaderViewLastY = currentY
+    }
+}
+
+extension HomeViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 30
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: podcastTableViewCellID, for: indexPath) as? PodcastTableViewCell else { return UITableViewCell() }
+        
+        cell.containerView.backgroundColor = .white
+        
+        let moreIcon = UIImage(systemName: "ellipsis", withConfiguration: iconConfig)
+        cell.topIconButton.setImage(moreIcon, for: .normal)
+        cell.topIconButton.tintColor = .appRed
+        let playIcon = UIImage(systemName: "play.circle", withConfiguration: iconConfig)
+        cell.bottomIconButton.setImage(playIcon, for: .normal)
+        cell.bottomIconButton.tintColor = .appRed
+        
+        cell.titleLabel.text = "Brenda Gilbert on How to Align Yourself With Great people in Work & Life"
+        cell.subtitleLabel.text = "Woman of Impact"
+        cell.captionLabel.text = "1 hr 6 min"
+        
+        return cell
+    }
+}
