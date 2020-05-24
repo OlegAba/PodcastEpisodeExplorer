@@ -30,7 +30,7 @@ class HomeViewController: ViewController {
         
         let date = Date()
         let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "dd/MM/yyyy"
+        dateformatter.dateFormat = "MM/dd/yyyy"
         let result = dateformatter.string(from: date)
         homeTableHeaderView.subtitleLabel.text = result
         
@@ -53,6 +53,11 @@ class HomeViewController: ViewController {
         super.viewDidLoad()
         setupNavigationBar()
         view.addSubview(podcastsTableView)
+        
+        let api = iTunesAPIEndpointRequest()
+        api.getTopPodcastsIDs { (ids: [String]?) in
+            print(ids)
+        }
     }
     
     override func viewDidLayoutSubviews() {
