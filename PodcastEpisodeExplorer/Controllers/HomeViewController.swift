@@ -56,7 +56,11 @@ class HomeViewController: ViewController {
         
         let api = iTunesAPIEndpointRequest()
         api.getTopPodcastsIDs { (ids: [String]?) in
-            print(ids)
+            guard let ids = ids else { return }
+            api.getRSSFeed(forArtistID: ids[0]) { (feedURL: String?) in
+                print(feedURL)
+            }
+            
         }
     }
     

@@ -22,6 +22,17 @@ fileprivate struct TopPodcastsResults: Decodable {
     let id: String
 }
 
+// Artist Lookup
+
+fileprivate struct ArtistSearchDescription: Decodable {
+    let results: [ArtistSearchResults]
+}
+
+fileprivate struct ArtistSearchResults: Decodable {
+    let feedUrl: String
+}
+
+
 class iTunesAPIEndpointRequest {
     
     // getNext10Podcasts -> Podcast(model)
@@ -55,6 +66,42 @@ class iTunesAPIEndpointRequest {
                     return result.id
                 }
                 completion(ids)
+                
+            } catch let jsonError {
+                print("Error serializing json: \(jsonError)")
+                completion(nil)
+                return
+            }
+        }.resume()
+    }
+    
+    func getRSSFeed(forArtistID artistID: String, completion: @escaping (String?) -> ()) {
+        
+        let urlString = "https://itunes.apple.com/lookup?id=\(artistID)"
+        guard let url = URL(string: urlString) else { completion(nil); return }
+        
+        URLSession.shared.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
+            
+            guard
+            let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+            let data = data, error == nil
+            else {
+                let statusCode = (response as? HTTPURLResponse)?.statusCode
+                let errorMessage = error?.localizedDescription
+                
+                print("\n---Request Failed---")
+                print("URL: \(url)")
+                print("Status Code: \(String(describing: statusCode))")
+                print("Error Message: \(String(describing: errorMessage))")
+                
+                completion(nil)
+                return
+            }
+            
+            do {
+                let description = try JSONDecoder().decode(ArtistSearchDescription.self, from: data)
+                let firstResult = description.results[0]
+                completion(firstResult.feedUrl)
                 
             } catch let jsonError {
                 print("Error serializing json: \(jsonError)")
