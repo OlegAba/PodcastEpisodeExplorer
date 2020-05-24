@@ -18,6 +18,7 @@
 		7C30017A2478D2E600F9DD0F /* HomeTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3001792478D2E600F9DD0F /* HomeTableHeaderView.swift */; };
 		7C30017C2479187900F9DD0F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C30017B2479187900F9DD0F /* UIImage+.swift */; };
 		7CBA46072479E64F006DA908 /* iTunesAPIEndpointRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA46062479E64F006DA908 /* iTunesAPIEndpointRequest.swift */; };
+		7CBA46092479FB78006DA908 /* EndpointRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA46082479FB78006DA908 /* EndpointRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		7C3001792478D2E600F9DD0F /* HomeTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableHeaderView.swift; sourceTree = "<group>"; };
 		7C30017B2479187900F9DD0F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		7CBA46062479E64F006DA908 /* iTunesAPIEndpointRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesAPIEndpointRequest.swift; sourceTree = "<group>"; };
+		7CBA46082479FB78006DA908 /* EndpointRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				7CBA46062479E64F006DA908 /* iTunesAPIEndpointRequest.swift */,
+				7CBA46082479FB78006DA908 /* EndpointRequest.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				7C0B86C92478924F008DC345 /* AppDelegate.swift in Sources */,
 				7CBA46072479E64F006DA908 /* iTunesAPIEndpointRequest.swift in Sources */,
 				7C3001782478D17000F9DD0F /* PodcastTableViewCell.swift in Sources */,
+				7CBA46092479FB78006DA908 /* EndpointRequest.swift in Sources */,
 				7C30017C2479187900F9DD0F /* UIImage+.swift in Sources */,
 				7C0B86E524789912008DC345 /* UIColor+.swift in Sources */,
 				7C30017A2478D2E600F9DD0F /* HomeTableHeaderView.swift in Sources */,
