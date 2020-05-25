@@ -21,6 +21,7 @@
 		7C30017C2479187900F9DD0F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C30017B2479187900F9DD0F /* UIImage+.swift */; };
 		7C45FF8C247BAA1800FF15BC /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C45FF8B247BAA1800FF15BC /* Podcast.swift */; };
 		7C45FF8E247BAD0300FF15BC /* PodcastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C45FF8D247BAD0300FF15BC /* PodcastManager.swift */; };
+		7C593BA8247C606000883D98 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C593BA7247C606000883D98 /* System.swift */; };
 		7CBA46072479E64F006DA908 /* iTunesAPIEndpointRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA46062479E64F006DA908 /* iTunesAPIEndpointRequest.swift */; };
 		7CBA46092479FB78006DA908 /* EndpointRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA46082479FB78006DA908 /* EndpointRequest.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		7C30017B2479187900F9DD0F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		7C45FF8B247BAA1800FF15BC /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		7C45FF8D247BAD0300FF15BC /* PodcastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastManager.swift; sourceTree = "<group>"; };
+		7C593BA7247C606000883D98 /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		7CBA46062479E64F006DA908 /* iTunesAPIEndpointRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesAPIEndpointRequest.swift; sourceTree = "<group>"; };
 		7CBA46082479FB78006DA908 /* EndpointRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointRequest.swift; sourceTree = "<group>"; };
 		A52E79A84778051E1A685D76 /* Pods_PodcastEpisodeExplorer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodcastEpisodeExplorer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				7C45FF8B247BAA1800FF15BC /* Podcast.swift */,
+				7C593BA7247C606000883D98 /* System.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				7CBA46072479E64F006DA908 /* iTunesAPIEndpointRequest.swift in Sources */,
 				7C101EFA247B5C8D008E6FDB /* RSSFeedEndpointRequest.swift in Sources */,
 				7C45FF8E247BAD0300FF15BC /* PodcastManager.swift in Sources */,
+				7C593BA8247C606000883D98 /* System.swift in Sources */,
 				7C3001782478D17000F9DD0F /* PodcastTableViewCell.swift in Sources */,
 				7CBA46092479FB78006DA908 /* EndpointRequest.swift in Sources */,
 				7C30017C2479187900F9DD0F /* UIImage+.swift in Sources */,

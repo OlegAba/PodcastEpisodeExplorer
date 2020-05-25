@@ -44,20 +44,38 @@ class HomeViewController: ViewController {
         homeTableHeaderView.translatesAutoresizingMaskIntoConstraints = false
         return homeTableHeaderView
     }()
+    
+    fileprivate lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.color = .black
+        activityIndicatorView.startAnimating()
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicatorView
+    }()
 
     fileprivate let podcastTableViewCellID = "PodcastTableViewCellReuseIdentifier"
     fileprivate var homeTableHeaderViewLastY: CGFloat = 0
     fileprivate let iconConfig = UIImage.SymbolConfiguration(pointSize: 23.0, weight: .bold)
+    fileprivate var podcasts = [Podcast]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         view.addSubview(podcastsTableView)
+        view.addSubview(activityIndicatorView)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         let podcastManager = PodcastManager()
         podcastManager.fetchNext(amount: 3) { (podcasts: [Podcast]?) in
-            guard let podcasts = podcasts else { return }
-            print(podcastManager.currentIndex)
+            DispatchQueue.main.async {
+                guard let podcasts = podcasts else { return }
+                self.podcasts.append(contentsOf: podcasts)
+                self.activityIndicatorView.isHidden = true
+                self.podcastsTableView.reloadData()
+            }
         }
     }
     
@@ -93,6 +111,9 @@ class HomeViewController: ViewController {
             homeTableHeaderView.topAnchor.constraint(equalTo: podcastsTableView.topAnchor),
             homeTableHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             homeTableHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            activityIndicatorView.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: view.layoutMarginsGuide.centerYAnchor),
         ])
         
         homeTableHeaderView.layoutIfNeeded()
@@ -130,7 +151,7 @@ extension HomeViewController: UITableViewDelegate {
 extension HomeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 30
+        return podcasts.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -140,7 +161,16 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: podcastTableViewCellID, for: indexPath) as? PodcastTableViewCell else { return UITableViewCell() }
+        style(cell)
         
+        let podcast = podcasts[indexPath.section]
+        setup(cell: cell, for: podcast)
+        cell.fetchImage(forUrl: podcast.imageUrl)
+        
+        return cell
+    }
+    
+    fileprivate func style(_ cell: PodcastTableViewCell) {
         cell.containerView.backgroundColor = .white
         
         let moreIcon = UIImage(systemName: "ellipsis", withConfiguration: iconConfig)
@@ -149,11 +179,18 @@ extension HomeViewController: UITableViewDataSource {
         let playIcon = UIImage(systemName: "play.circle", withConfiguration: iconConfig)
         cell.bottomIconButton.setImage(playIcon, for: .normal)
         cell.bottomIconButton.tintColor = .appRed
+    }
+    
+    fileprivate func setup(cell: PodcastTableViewCell, for podcast: Podcast) {
+        cell.titleLabel.text = podcast.description
+        cell.subtitleLabel.text = podcast.title
         
-        cell.titleLabel.text = "Brenda Gilbert on How to Align Yourself With Great people in Work & Life"
-        cell.subtitleLabel.text = "Woman of Impact"
-        cell.captionLabel.text = "1 hr 6 min"
+        let duration: NSInteger = NSInteger(podcast.length)
+        let minutes = (duration / 60) % 60
+        let minutesText = (minutes == 0 ? "" : "\(minutes) min")
+        let hours = (duration / 3600)
+        let hoursText = (hours == 0 ? "" : "\(hours) hr ")
         
-        return cell
+        cell.captionLabel.text = hoursText + minutesText
     }
 }

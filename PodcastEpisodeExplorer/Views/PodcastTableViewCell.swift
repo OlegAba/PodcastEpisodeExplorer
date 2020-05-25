@@ -20,7 +20,7 @@ class PodcastTableViewCell: UITableViewCell {
     
     lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
+        imageView.backgroundColor = .appPink
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -67,6 +67,8 @@ class PodcastTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    var logoImageUrl: String?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -125,5 +127,31 @@ class PodcastTableViewCell: UITableViewCell {
             captionLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10.0),
             captionLabel.trailingAnchor.constraint(equalTo: topIconButton.leadingAnchor, constant:  -5.0),
         ])
+    }
+    
+    func fetchImage(forUrl url: String) {
+        
+        logoImageUrl = url
+        logoImageView.image = nil
+        
+        let imageKey = NSString(string: url)
+        if let imageFromCache = System.shared.imageCache.object(forKey: imageKey) {
+            logoImageView.image = imageFromCache
+            return
+        }
+        
+        EndpointRequest(url: url).getData { (data: Data?) in
+            guard let data = data else { return }
+            
+            if let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    if (self.logoImageUrl == url) {
+                        self.logoImageView.image = image
+                    }
+                    
+                    System.shared.imageCache.setObject(image, forKey: imageKey)
+                }
+            }
+        }
     }
 }
