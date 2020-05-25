@@ -6,4 +6,5 @@ DerivedData
 *.xcuserstate
 *.DS_Store
 
-Resources/Keys.plist
+Pods/
+Podfile.lock

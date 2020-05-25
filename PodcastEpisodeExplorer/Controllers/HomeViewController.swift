@@ -30,7 +30,7 @@ class HomeViewController: ViewController {
         
         let date = Date()
         let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "dd/MM/yyyy"
+        dateformatter.dateFormat = "MM/dd/yyyy"
         let result = dateformatter.string(from: date)
         homeTableHeaderView.subtitleLabel.text = result
         
@@ -53,6 +53,12 @@ class HomeViewController: ViewController {
         super.viewDidLoad()
         setupNavigationBar()
         view.addSubview(podcastsTableView)
+        
+        let podcastManager = PodcastManager()
+        podcastManager.fetchNext(amount: 3) { (podcasts: [Podcast]?) in
+            guard let podcasts = podcasts else { return }
+            print(podcastManager.currentIndex)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -63,7 +69,7 @@ class HomeViewController: ViewController {
     fileprivate func setupNavigationBar() {
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.navigationBar.barTintColor = .white
-        //navigationController?.navigationBar.shadowImage = UIColor.appPink.as1ptImage()
+        navigationController?.navigationBar.shadowImage = UIColor.appPink.as1ptImage()
         //navigationController?.preferredStatusBarStyle = .darkContent
         
         navigationItem.title = "Auby"
@@ -110,15 +116,11 @@ extension HomeViewController: UITableViewDelegate {
         // Hidden
         if ((homeTableHeaderViewLastY <= headerHeight) && (currentY > headerHeight)) {
             navigationController?.setNavigationBarHidden(false, animated: true)
-            
-            //podcastsTableView.verticalScrollIndicatorInsets.top = homeTableHeaderView.frame.size.height
         }
         
         // Shown
         if ((homeTableHeaderViewLastY > headerHeight) && (currentY <= headerHeight)) {
             navigationController?.setNavigationBarHidden(true, animated: true)
-            
-            //podcastsTableView.verticalScrollIndicatorInsets.top = (navigationController?.navigationBar.frame.size.height ?? 0)
         }
         
         homeTableHeaderViewLastY = currentY
