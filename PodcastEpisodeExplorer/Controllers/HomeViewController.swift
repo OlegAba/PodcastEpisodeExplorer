@@ -54,12 +54,20 @@ class HomeViewController: ViewController {
         setupNavigationBar()
         view.addSubview(podcastsTableView)
         
+        /*
         let api = iTunesAPIEndpointRequest()
         api.getTopPodcastsIDs { (ids: [String]?) in
-            guard let ids = ids else { return }
-            api.getRSSFeed(forArtistID: ids[0]) { (feedURL: String?) in
-                print(feedURL)
+            guard let ids = ids?.prefix(10) else { return }
+            
+            for id in ids {
+                api.getRSSFeed(forArtistID: id) { (feedURL: String?) in
+                    print(feedURL)
+                }
             }
+        }
+        */
+        
+        RSSFeedEndpointRequest(url: "http://joeroganexp.joerogan.libsynpro.com/rss").fetchPodcast { (_) in
             
         }
     }

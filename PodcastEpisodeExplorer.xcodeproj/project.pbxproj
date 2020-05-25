@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		7C0B86D224789251008DC345 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C0B86D124789251008DC345 /* Assets.xcassets */; };
 		7C0B86D524789251008DC345 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C0B86D324789251008DC345 /* LaunchScreen.storyboard */; };
 		7C0B86E524789912008DC345 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0B86E424789912008DC345 /* UIColor+.swift */; };
+		7C101EFA247B5C8D008E6FDB /* RSSFeedEndpointRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C101EF9247B5C8D008E6FDB /* RSSFeedEndpointRequest.swift */; };
 		7C23E14124789E7F00A13474 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C23E14024789E7F00A13474 /* UIView+.swift */; };
 		7C23E14324789FD000A13474 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C23E14224789FD000A13474 /* HomeViewController.swift */; };
 		7C3001782478D17000F9DD0F /* PodcastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3001772478D17000F9DD0F /* PodcastTableViewCell.swift */; };
@@ -31,6 +32,7 @@
 		7C0B86D424789251008DC345 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C0B86D624789251008DC345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C0B86E424789912008DC345 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		7C101EF9247B5C8D008E6FDB /* RSSFeedEndpointRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeedEndpointRequest.swift; sourceTree = "<group>"; };
 		7C23E14024789E7F00A13474 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		7C23E14224789FD000A13474 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7C3001772478D17000F9DD0F /* PodcastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastTableViewCell.swift; sourceTree = "<group>"; };
@@ -60,7 +62,6 @@
 				BED5E7A098E6147FDADAD731 /* Pods-PodcastEpisodeExplorer.debug.xcconfig */,
 				252BF5D6F3B3FE612D920696 /* Pods-PodcastEpisodeExplorer.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -146,6 +147,7 @@
 			children = (
 				7CBA46062479E64F006DA908 /* iTunesAPIEndpointRequest.swift */,
 				7CBA46082479FB78006DA908 /* EndpointRequest.swift */,
+				7C101EF9247B5C8D008E6FDB /* RSSFeedEndpointRequest.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -277,6 +279,7 @@
 				7C0B86CD2478924F008DC345 /* ViewController.swift in Sources */,
 				7C0B86C92478924F008DC345 /* AppDelegate.swift in Sources */,
 				7CBA46072479E64F006DA908 /* iTunesAPIEndpointRequest.swift in Sources */,
+				7C101EFA247B5C8D008E6FDB /* RSSFeedEndpointRequest.swift in Sources */,
 				7C3001782478D17000F9DD0F /* PodcastTableViewCell.swift in Sources */,
 				7CBA46092479FB78006DA908 /* EndpointRequest.swift in Sources */,
 				7C30017C2479187900F9DD0F /* UIImage+.swift in Sources */,
