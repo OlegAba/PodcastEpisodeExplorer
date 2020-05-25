@@ -7,5 +7,6 @@ target 'PodcastEpisodeExplorer' do
 
   # Pods for PodcastEpisodeExplorer
   pod 'FeedKit', '~> 9.0'
+  pod 'SwiftAudioPlayer'
 
 end

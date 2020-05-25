@@ -30,12 +30,14 @@ class RSSFeedEndpointRequest {
                     let title = rssFeed.title,
                     let imageUrl = rssFeed.image?.url,
                     let episode = rssFeed.items?.first,
+                    let episodeTitle = episode.title,
                     let description = episode.description,
                     let length = episode.iTunes?.iTunesDuration,
                     let audioLink = episode.enclosure?.attributes?.url
                     else { completion(nil); return }
                 
                 let podcast = Podcast(title: title,
+                                      episodeTitle: episodeTitle,
                                       imageUrl: imageUrl,
                                       description: description,
                                       length: length,

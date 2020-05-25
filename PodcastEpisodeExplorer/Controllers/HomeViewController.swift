@@ -52,11 +52,17 @@ class HomeViewController: ViewController {
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicatorView
     }()
+    
+    fileprivate lazy var podcastPlayerViewController: PodcastPlayerViewController = {
+        let podcastPlayerViewController = PodcastPlayerViewController()
+        return podcastPlayerViewController
+    }()
 
     fileprivate let podcastTableViewCellID = "PodcastTableViewCellReuseIdentifier"
     fileprivate var homeTableHeaderViewLastY: CGFloat = 0
     fileprivate let iconConfig = UIImage.SymbolConfiguration(pointSize: 23.0, weight: .bold)
     fileprivate var podcasts = [Podcast]()
+    fileprivate var podcastStreamDelegate: PodcastStreamDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +73,7 @@ class HomeViewController: ViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        podcastStreamDelegate = podcastPlayerViewController
         
         let podcastManager = PodcastManager()
         podcastManager.fetchNext(amount: 3) { (podcasts: [Podcast]?) in
@@ -126,7 +133,9 @@ class HomeViewController: ViewController {
 extension HomeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        let podcast = podcasts[indexPath.section]
+        podcastStreamDelegate.update(ToPodcast: podcast)
+        present(podcastPlayerViewController, animated: true, completion: nil)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -182,7 +191,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     fileprivate func setup(cell: PodcastTableViewCell, for podcast: Podcast) {
-        cell.titleLabel.text = podcast.description
+        cell.titleLabel.text = podcast.episodeTitle
         cell.subtitleLabel.text = podcast.title
         
         let duration: NSInteger = NSInteger(podcast.length)

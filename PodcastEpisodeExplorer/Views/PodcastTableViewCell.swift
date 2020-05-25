@@ -22,6 +22,7 @@ class PodcastTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.backgroundColor = .appPink
         imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -44,6 +45,7 @@ class PodcastTableViewCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .subheadline).pointSize)
         label.numberOfLines = 3
         label.lineBreakMode = .byTruncatingTail
+        label.isUserInteractionEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -54,6 +56,7 @@ class PodcastTableViewCell: UITableViewCell {
         label.font = UIFont.preferredFont(forTextStyle: .footnote)
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
+        label.isUserInteractionEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -64,6 +67,7 @@ class PodcastTableViewCell: UITableViewCell {
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
+        label.isUserInteractionEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
