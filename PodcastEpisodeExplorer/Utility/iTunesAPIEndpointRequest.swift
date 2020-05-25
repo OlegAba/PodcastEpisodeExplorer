@@ -8,30 +8,6 @@
 
 import Foundation
 
-// Top Podcasts
-
-fileprivate struct TopPodcastsDescription: Decodable {
-    let feed: TopPodcastsFeed
-}
-
-fileprivate struct TopPodcastsFeed: Decodable {
-    let results: [TopPodcastsResults]
-}
-
-fileprivate struct TopPodcastsResults: Decodable {
-    let id: String
-}
-
-// Artist Lookup
-
-fileprivate struct ArtistSearchDescription: Decodable {
-    let results: [ArtistSearchResults]
-}
-
-fileprivate struct ArtistSearchResults: Decodable {
-    let feedUrl: String
-}
-
 class iTunesAPIEndpointRequest {
     
     func getTopPodcastsIDs(completion: @escaping ([String]?) -> ()) {
@@ -75,4 +51,28 @@ class iTunesAPIEndpointRequest {
             }
         }
     }
+}
+
+// Top Podcasts
+
+fileprivate struct TopPodcastsDescription: Decodable {
+    let feed: TopPodcastsFeed
+}
+
+fileprivate struct TopPodcastsFeed: Decodable {
+    let results: [TopPodcastsResults]
+}
+
+fileprivate struct TopPodcastsResults: Decodable {
+    let id: String
+}
+
+// Artist Lookup
+
+fileprivate struct ArtistSearchDescription: Decodable {
+    let results: [ArtistSearchResults]
+}
+
+fileprivate struct ArtistSearchResults: Decodable {
+    let feedUrl: String
 }
