@@ -6,7 +6,7 @@
 //  Copyright © 2020 Oleg Abalonski. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import FeedKit
 
 class RSSFeedEndpointRequest {
@@ -17,7 +17,7 @@ class RSSFeedEndpointRequest {
         self.url = url
     }
     
-    func fetchPodcast(completion: @escaping (String?) -> ()) {
+    func fetchPodcast(completion: @escaping (Podcast?) -> ()) {
         
         guard let feedUrl = URL(string: url) else { completion(nil); return }
         let parser = FeedParser(URL: feedUrl)
@@ -35,7 +35,12 @@ class RSSFeedEndpointRequest {
                     let audioLink = episode.enclosure?.attributes?.url
                     else { completion(nil); return }
                 
-                // Init Podcast object and completion it
+                let podcast = Podcast(title: title,
+                                      imageUrl: imageUrl,
+                                      description: description,
+                                      length: length,
+                                      audioUrl: audioLink)
+                completion(podcast)
                 
             case.failure(let error):
                 print(error)
@@ -43,5 +48,4 @@ class RSSFeedEndpointRequest {
             }
         }
     }
-    
 }
