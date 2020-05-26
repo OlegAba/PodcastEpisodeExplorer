@@ -10,21 +10,39 @@ import UIKit
 
 class PodcastButtonsView: UIView {
     
-    lazy var leftButton: UIButton = {
+    lazy var playIconImage: UIImage? = {
+        let image = UIImage(systemName: "play.fill", withConfiguration: centerIconConfig)
+        return image
+    }()
+    
+    lazy var pauseIconImage: UIImage? = {
+        let image = UIImage(systemName: "pause.fill", withConfiguration: centerIconConfig)
+        return image
+    }()
+    
+    lazy var skipBackwardsButton: UIButton = {
         let button = UIButton()
+        let backwardsIcon = UIImage(systemName: "gobackward.15", withConfiguration: skipIconConfig)
+        button.setImage(backwardsIcon, for: .normal)
+        button.tintColor = .appRed
         button.isUserInteractionEnabled = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    lazy var centerButton: UIButton = {
+    lazy var playPauseButton: UIButton = {
         let button = UIButton()
+        button.setImage(playIconImage, for: .normal)
+        button.tintColor = .appRed
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    lazy var rightButton: UIButton = {
+    lazy var skipForwardButton: UIButton = {
         let button = UIButton()
+        let forwardIcon = UIImage(systemName: "goforward.30", withConfiguration: skipIconConfig)
+        button.setImage(forwardIcon, for: .normal)
+        button.tintColor = .appRed
         button.isUserInteractionEnabled = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -44,6 +62,9 @@ class PodcastButtonsView: UIView {
         return view
     }()
     
+    fileprivate let skipIconConfig = UIImage.SymbolConfiguration(pointSize: 25.0, weight: .bold)
+    fileprivate let centerIconConfig = UIImage.SymbolConfiguration(pointSize: 45.0, weight: .bold)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -55,40 +76,40 @@ class PodcastButtonsView: UIView {
     }
     
     fileprivate func setupViews() {
-        addSubview(centerButton)
+        addSubview(playPauseButton)
         addSubview(leftContainerView)
         addSubview(rightContainerView)
-        addSubview(leftButton)
-        addSubview(rightButton)
+        addSubview(skipBackwardsButton)
+        addSubview(skipForwardButton)
     }
     
     fileprivate func layoutViews() {
         
         NSLayoutConstraint.activate([
-            centerButton.heightAnchor.constraint(equalToConstant: centerButton.intrinsicContentSize.height),
-            centerButton.widthAnchor.constraint(equalTo: centerButton.heightAnchor),
-            centerButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            centerButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            playPauseButton.heightAnchor.constraint(equalToConstant: playPauseButton.intrinsicContentSize.height),
+            playPauseButton.widthAnchor.constraint(equalTo: playPauseButton.heightAnchor),
+            playPauseButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            playPauseButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             leftContainerView.topAnchor.constraint(equalTo: topAnchor),
             leftContainerView.bottomAnchor.constraint(equalTo: bottomAnchor),
             leftContainerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            leftContainerView.trailingAnchor.constraint(equalTo: centerButton.centerXAnchor),
+            leftContainerView.trailingAnchor.constraint(equalTo: playPauseButton.centerXAnchor),
             
-            leftButton.heightAnchor.constraint(equalToConstant: leftButton.intrinsicContentSize.height),
-            leftButton.widthAnchor.constraint(equalTo: leftButton.heightAnchor),
-            leftButton.centerXAnchor.constraint(equalTo: leftContainerView.centerXAnchor),
-            leftButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            skipBackwardsButton.heightAnchor.constraint(equalToConstant: skipBackwardsButton.intrinsicContentSize.height),
+            skipBackwardsButton.widthAnchor.constraint(equalTo: skipBackwardsButton.heightAnchor),
+            skipBackwardsButton.centerXAnchor.constraint(equalTo: leftContainerView.centerXAnchor),
+            skipBackwardsButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             rightContainerView.topAnchor.constraint(equalTo: topAnchor),
             rightContainerView.bottomAnchor.constraint(equalTo: bottomAnchor),
             rightContainerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            rightContainerView.leadingAnchor.constraint(equalTo: centerButton.centerXAnchor),
+            rightContainerView.leadingAnchor.constraint(equalTo: playPauseButton.centerXAnchor),
             
-            rightButton.heightAnchor.constraint(equalToConstant: rightButton.intrinsicContentSize.height),
-            rightButton.widthAnchor.constraint(equalTo: rightButton.heightAnchor),
-            rightButton.centerXAnchor.constraint(equalTo: rightContainerView.centerXAnchor),
-            rightButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            skipForwardButton.heightAnchor.constraint(equalToConstant: skipForwardButton.intrinsicContentSize.height),
+            skipForwardButton.widthAnchor.constraint(equalTo: skipForwardButton.heightAnchor),
+            skipForwardButton.centerXAnchor.constraint(equalTo: rightContainerView.centerXAnchor),
+            skipForwardButton.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
     }
 }
