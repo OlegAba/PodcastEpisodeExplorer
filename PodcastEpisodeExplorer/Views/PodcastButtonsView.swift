@@ -10,6 +10,8 @@ import UIKit
 
 class PodcastButtonsView: UIView {
     
+    // MARK: - Internal Properties
+    
     lazy var playIconImage: UIImage? = {
         let image = UIImage(systemName: "play.fill", withConfiguration: centerIconConfig)
         return image
@@ -48,6 +50,8 @@ class PodcastButtonsView: UIView {
         return button
     }()
     
+    // MARK: - Private Properties
+    
     fileprivate lazy var leftContainerView: UIView = {
         let view = UIView()
         view.isUserInteractionEnabled = false
@@ -65,6 +69,8 @@ class PodcastButtonsView: UIView {
     fileprivate let skipIconConfig = UIImage.SymbolConfiguration(pointSize: 25.0, weight: .bold)
     fileprivate let centerIconConfig = UIImage.SymbolConfiguration(pointSize: 45.0, weight: .bold)
     
+    // MARK: - Lifetime
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -75,6 +81,8 @@ class PodcastButtonsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup
+    
     fileprivate func setupViews() {
         addSubview(playPauseButton)
         addSubview(leftContainerView)
@@ -82,6 +90,8 @@ class PodcastButtonsView: UIView {
         addSubview(skipBackwardsButton)
         addSubview(skipForwardButton)
     }
+    
+    // MARK: - Layout
     
     fileprivate func layoutViews() {
         
