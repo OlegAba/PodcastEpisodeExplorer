@@ -76,7 +76,7 @@ class HomeViewController: ViewController {
         podcastStreamDelegate = podcastPlayerViewController
         
         let podcastManager = PodcastManager()
-        podcastManager.fetchPodcast(amount: 10) { (podcasts: [Podcast]?) in
+        podcastManager.fetchPodcast(amount: 5) { (podcasts: [Podcast]?) in
             DispatchQueue.main.async {
                 guard let podcasts = podcasts else { return }
                 self.podcasts.append(contentsOf: podcasts)
@@ -92,14 +92,7 @@ class HomeViewController: ViewController {
     }
     
     fileprivate func setupNavigationBar() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.navigationBar.barTintColor = .white
-        //navigationController?.navigationBar.shadowImage = UIColor.darkGray.as1ptImage()
-        //navigationController?.preferredStatusBarStyle = .darkContent
-        
         navigationItem.title = "Auby"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        
         let shareBarButtonItem = UIBarButtonItem(image: .shareIcon, style: .plain, target: self, action: nil)
         shareBarButtonItem.tintColor = .appRed
         navigationItem.rightBarButtonItem = shareBarButtonItem
