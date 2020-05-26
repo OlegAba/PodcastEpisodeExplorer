@@ -55,7 +55,6 @@ class PodcastButtonsView: UIView {
     }
     
     fileprivate func setupViews() {
-        backgroundColor = .white
         addSubview(centerButton)
         addSubview(leftContainerView)
         addSubview(rightContainerView)

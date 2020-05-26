@@ -76,7 +76,7 @@ class HomeViewController: ViewController {
         podcastStreamDelegate = podcastPlayerViewController
         
         let podcastManager = PodcastManager()
-        podcastManager.fetchNext(amount: 3) { (podcasts: [Podcast]?) in
+        podcastManager.fetchPodcast(amount: 10) { (podcasts: [Podcast]?) in
             DispatchQueue.main.async {
                 guard let podcasts = podcasts else { return }
                 self.podcasts.append(contentsOf: podcasts)
@@ -94,7 +94,7 @@ class HomeViewController: ViewController {
     fileprivate func setupNavigationBar() {
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.shadowImage = UIColor.appPink.as1ptImage()
+        //navigationController?.navigationBar.shadowImage = UIColor.darkGray.as1ptImage()
         //navigationController?.preferredStatusBarStyle = .darkContent
         
         navigationItem.title = "Auby"
@@ -131,12 +131,6 @@ class HomeViewController: ViewController {
 }
 
 extension HomeViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let podcast = podcasts[indexPath.section]
-        podcastStreamDelegate.update(ToPodcast: podcast)
-        present(podcastPlayerViewController, animated: true, completion: nil)
-    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
@@ -170,24 +164,12 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: podcastTableViewCellID, for: indexPath) as? PodcastTableViewCell else { return UITableViewCell() }
-        style(cell)
         
         let podcast = podcasts[indexPath.section]
         setup(cell: cell, for: podcast)
         cell.fetchImage(forUrl: podcast.imageUrl)
         
         return cell
-    }
-    
-    fileprivate func style(_ cell: PodcastTableViewCell) {
-        cell.containerView.backgroundColor = .white
-        
-        let moreIcon = UIImage(systemName: "ellipsis", withConfiguration: iconConfig)
-        cell.topIconButton.setImage(moreIcon, for: .normal)
-        cell.topIconButton.tintColor = .appRed
-        let playIcon = UIImage(systemName: "play.circle", withConfiguration: iconConfig)
-        cell.bottomIconButton.setImage(playIcon, for: .normal)
-        cell.bottomIconButton.tintColor = .appRed
     }
     
     fileprivate func setup(cell: PodcastTableViewCell, for podcast: Podcast) {
@@ -201,5 +183,21 @@ extension HomeViewController: UITableViewDataSource {
         let hoursText = (hours == 0 ? "" : "\(hours) hr ")
         
         cell.captionLabel.text = hoursText + minutesText
+        cell.delegate = self
+    }
+}
+
+extension HomeViewController: PodcastTableViewCellDelegate {
+    
+    func podcastTableViewCellMoreButtonWasTapped(_ podcastTableViewCell: PodcastTableViewCell) {
+        guard let indexPath = podcastsTableView.indexPath(for: podcastTableViewCell) else { return }
+        print("More button was tapped on tableViewCell[\(indexPath.section)]")
+    }
+    
+    func podcastTableViewCellPlayPauseButtonWasTapped(_ podcastTableViewCell: PodcastTableViewCell) {
+        guard let indexPath = podcastsTableView.indexPath(for: podcastTableViewCell) else { return }
+        let podcast = podcasts[indexPath.section]
+        podcastStreamDelegate.update(ToPodcast: podcast)
+        present(podcastPlayerViewController, animated: true, completion: nil)
     }
 }

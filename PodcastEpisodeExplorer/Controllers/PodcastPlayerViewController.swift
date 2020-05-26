@@ -11,6 +11,7 @@ import SwiftAudioPlayer
 
 protocol PodcastStreamDelegate {
     func update(ToPodcast podcast: Podcast)
+    func pause()
 }
 
 class PodcastPlayerViewController: ViewController {
@@ -29,6 +30,28 @@ class PodcastPlayerViewController: ViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+    
+    fileprivate lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .title2).pointSize)
+        label.textAlignment = .center
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    fileprivate lazy var subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .darkGray
+        label.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .title3).pointSize)
+        label.textAlignment = .center
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     fileprivate lazy var podcastButtonsView: PodcastButtonsView = {
@@ -65,7 +88,6 @@ class PodcastPlayerViewController: ViewController {
     }()
     
     fileprivate let centerIconConfig = UIImage.SymbolConfiguration(pointSize: 45.0, weight: .bold)
-    
     fileprivate var isPlaying = false {
         didSet {
             if isPlaying {
@@ -82,7 +104,14 @@ class PodcastPlayerViewController: ViewController {
         super.viewDidLoad()
         view.addSubview(gestureIndicatorView)
         view.addSubview(logoImageView)
+        view.addSubview(titleLabel)
+        view.addSubview(subtitleLabel)
         view.addSubview(podcastButtonsView)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        isPlaying = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -103,10 +132,18 @@ class PodcastPlayerViewController: ViewController {
             logoImageView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 0.7),
             logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor),
             
-            podcastButtonsView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 40.0),
+            titleLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 40.0),
+            titleLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 10.0),
+            titleLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10.0),
+            
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            subtitleLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 10.0),
+            subtitleLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10.0),
+            
+            podcastButtonsView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor),
             podcastButtonsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             podcastButtonsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            podcastButtonsView.heightAnchor.constraint(equalToConstant: 200.0),
+            podcastButtonsView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
         ])
     }
     
@@ -126,8 +163,14 @@ class PodcastPlayerViewController: ViewController {
 extension PodcastPlayerViewController: PodcastStreamDelegate {
     
     func update(ToPodcast podcast: Podcast) {
+        titleLabel.text = podcast.episodeTitle
+        subtitleLabel.text = podcast.title
         fetchImage(forUrl: podcast.imageUrl)
         streamAudio(forUrl: podcast.audioUrl)
+    }
+    
+    func pause() {
+        isPlaying = false
     }
     
     fileprivate func fetchImage(forUrl url: String) {
@@ -152,6 +195,7 @@ extension PodcastPlayerViewController: PodcastStreamDelegate {
     
     fileprivate func streamAudio(forUrl url: String) {
         guard let url = URL(string: url) else { return }
+        SAPlayer.shared.stopStreamingRemoteAudio()
         SAPlayer.shared.startRemoteAudio(withRemoteUrl: url)
         isPlaying = true
     }

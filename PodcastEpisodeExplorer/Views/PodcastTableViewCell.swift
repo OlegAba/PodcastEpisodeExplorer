@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol PodcastTableViewCellDelegate {
+    func podcastTableViewCellMoreButtonWasTapped(_ podcastTableViewCell: PodcastTableViewCell)
+    func podcastTableViewCellPlayPauseButtonWasTapped(_ podcastTableViewCell: PodcastTableViewCell)
+}
+
 class PodcastTableViewCell: UITableViewCell {
     
     lazy var containerView: UIView = {
         let view = UIView()
+        view.backgroundColor = .white
         view.layoutMargins = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
         view.layer.cornerRadius = 35.0
         view.translatesAutoresizingMaskIntoConstraints = false;
@@ -27,14 +33,22 @@ class PodcastTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    lazy var topIconButton: UIButton = {
+    lazy var moreIconButton: UIButton = {
         let button = UIButton()
+        let moreIcon = UIImage(systemName: "ellipsis", withConfiguration: iconConfig)
+        button.setImage(moreIcon, for: .normal)
+        button.tintColor = .appRed
+        button.addTarget(self, action: #selector(moreButtonWasTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    lazy var bottomIconButton: UIButton = {
+    lazy var playPauseIconButton: UIButton = {
         let button = UIButton()
+        let playIcon = UIImage(systemName: "play.circle", withConfiguration: iconConfig)
+        button.setImage(playIcon, for: .normal)
+        button.tintColor = .appRed
+        button.addTarget(self, action: #selector(playPauseButtonWasTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -72,6 +86,8 @@ class PodcastTableViewCell: UITableViewCell {
         return label
     }()
     
+    let iconConfig = UIImage.SymbolConfiguration(pointSize: 23.0, weight: .bold)
+    var delegate: PodcastTableViewCellDelegate!
     var logoImageUrl: String?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -89,8 +105,8 @@ class PodcastTableViewCell: UITableViewCell {
         selectionStyle = .none
         addSubview(containerView)
         containerView.addSubview(logoImageView)
-        containerView.addSubview(topIconButton)
-        containerView.addSubview(bottomIconButton)
+        containerView.addSubview(moreIconButton)
+        containerView.addSubview(playPauseIconButton)
         containerView.addSubview(titleLabel)
         containerView.addSubview(subtitleLabel)
         containerView.addSubview(captionLabel)
@@ -109,28 +125,36 @@ class PodcastTableViewCell: UITableViewCell {
             logoImageView.widthAnchor.constraint(equalToConstant: 55.0),
             logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor),
             
-            topIconButton.topAnchor.constraint(equalTo: containerView.layoutMarginsGuide.topAnchor, constant: -10.0),
-            topIconButton.trailingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.trailingAnchor),
-            topIconButton.heightAnchor.constraint(equalToConstant: topIconButton.intrinsicContentSize.height),
-            topIconButton.widthAnchor.constraint(equalTo: topIconButton.heightAnchor),
+            moreIconButton.topAnchor.constraint(equalTo: containerView.layoutMarginsGuide.topAnchor, constant: -5.0),
+            moreIconButton.trailingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.trailingAnchor),
+            moreIconButton.heightAnchor.constraint(equalToConstant: moreIconButton.intrinsicContentSize.height),
+            moreIconButton.widthAnchor.constraint(equalToConstant: moreIconButton.intrinsicContentSize.width),
             
-            bottomIconButton.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor, constant: 10.0),
-            bottomIconButton.trailingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.trailingAnchor),
-            bottomIconButton.heightAnchor.constraint(equalToConstant: topIconButton.intrinsicContentSize.height),
-            bottomIconButton.widthAnchor.constraint(equalTo: topIconButton.heightAnchor),
+            playPauseIconButton.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor, constant: 5.0),
+            playPauseIconButton.trailingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.trailingAnchor),
+            playPauseIconButton.heightAnchor.constraint(equalToConstant: playPauseIconButton.intrinsicContentSize.height),
+            playPauseIconButton.widthAnchor.constraint(equalToConstant: playPauseIconButton.intrinsicContentSize.width),
             
             titleLabel.topAnchor.constraint(equalTo: containerView.layoutMarginsGuide.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10.0),
-            titleLabel.trailingAnchor.constraint(equalTo: topIconButton.leadingAnchor, constant:  -5.0),
+            titleLabel.trailingAnchor.constraint(equalTo: moreIconButton.leadingAnchor, constant:  -10.0),
             
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10.0),
             subtitleLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10.0),
-            subtitleLabel.trailingAnchor.constraint(equalTo: topIconButton.leadingAnchor, constant:  -5.0),
+            subtitleLabel.trailingAnchor.constraint(equalTo: moreIconButton.leadingAnchor, constant:  -10.0),
             
             captionLabel.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor),
             captionLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10.0),
-            captionLabel.trailingAnchor.constraint(equalTo: topIconButton.leadingAnchor, constant:  -5.0),
+            captionLabel.trailingAnchor.constraint(equalTo: moreIconButton.leadingAnchor, constant:  -10.0),
         ])
+    }
+
+    @objc fileprivate func moreButtonWasTapped() {
+        delegate.podcastTableViewCellMoreButtonWasTapped(self)
+    }
+    
+    @objc fileprivate func playPauseButtonWasTapped() {
+        delegate.podcastTableViewCellPlayPauseButtonWasTapped(self)
     }
     
     func fetchImage(forUrl url: String) {

@@ -130,8 +130,8 @@
 		7C0B86DE24789741008DC345 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7CB7BC8D247C7025003037DE /* PodcastPlayerViews */,
 				7C3001772478D17000F9DD0F /* PodcastTableViewCell.swift */,
+				7CB7BC8E247C7056003037DE /* PodcastButtonsView.swift */,
 				7C3001792478D2E600F9DD0F /* HomeTableHeaderView.swift */,
 			);
 			path = Views;
@@ -154,14 +154,6 @@
 				7C30017B2479187900F9DD0F /* UIImage+.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		7CB7BC8D247C7025003037DE /* PodcastPlayerViews */ = {
-			isa = PBXGroup;
-			children = (
-				7CB7BC8E247C7056003037DE /* PodcastButtonsView.swift */,
-			);
-			path = PodcastPlayerViews;
 			sourceTree = "<group>";
 		};
 		7CBA46052479DC19006DA908 /* Utility */ = {
