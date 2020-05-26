@@ -32,14 +32,20 @@ class HomeTableHeaderView: UIView {
         return label
     }()
     
-    lazy var iconButton: UIButton = {
+    lazy var shareButton: UIButton = {
         let button = UIButton()
+        let config = UIImage.SymbolConfiguration(pointSize: 23.0, weight: .bold)
+        let shareIcon = UIImage(systemName: "square.and.arrow.up", withConfiguration: config)
+        button.setImage(shareIcon, for: .normal)
+        button.tintColor = .appRed
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    lazy var textButton: UIButton = {
+    lazy var playAllButton: UIButton = {
         let button = UIButton()
+        button.setTitle("Play All", for: .normal)
+        button.backgroundColor = UIColor.appRed
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .subheadline).pointSize)
         button.contentEdgeInsets.top = 13.0
         button.contentEdgeInsets.bottom = 13.0
@@ -64,9 +70,9 @@ class HomeTableHeaderView: UIView {
     
     fileprivate func setupViews() {
         addSubview(titleLabel)
-        addSubview(iconButton)
+        addSubview(shareButton)
         addSubview(subtitleLabel)
-        addSubview(textButton)
+        addSubview(playAllButton)
     }
     
     // MARK: - Layout
@@ -76,23 +82,23 @@ class HomeTableHeaderView: UIView {
         let margin: CGFloat = 5.0
         
         NSLayoutConstraint.activate([
-            iconButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            iconButton.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            iconButton.heightAnchor.constraint(equalToConstant: iconButton.intrinsicContentSize.height),
-            iconButton.widthAnchor.constraint(equalTo: iconButton.heightAnchor),
+            shareButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            shareButton.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            shareButton.heightAnchor.constraint(equalToConstant: shareButton.intrinsicContentSize.height),
+            shareButton.widthAnchor.constraint(equalTo: shareButton.heightAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: iconButton.leadingAnchor, constant: -(margin * 8.0)),
+            titleLabel.trailingAnchor.constraint(equalTo: shareButton.leadingAnchor, constant: -(margin * 8.0)),
             
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin * 2.0),
             subtitleLabel.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             subtitleLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             
-            textButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: margin),
-            textButton.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            textButton.widthAnchor.constraint(equalTo: layoutMarginsGuide.widthAnchor, multiplier: 1/2.2),
-            textButton.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)
+            playAllButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: margin),
+            playAllButton.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            playAllButton.widthAnchor.constraint(equalTo: layoutMarginsGuide.widthAnchor, multiplier: 1/2.2),
+            playAllButton.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)
         ])
     }
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class HomeViewController: ViewController {
     
+    // MARK: - Private Properties
+    
     fileprivate lazy var podcastsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.delegate = self
@@ -34,12 +36,8 @@ class HomeViewController: ViewController {
         let result = dateformatter.string(from: date)
         homeTableHeaderView.subtitleLabel.text = result
         
-        let shareIcon = UIImage(systemName: "square.and.arrow.up", withConfiguration: iconConfig)
-        homeTableHeaderView.iconButton.setImage(shareIcon, for: .normal)
-        homeTableHeaderView.iconButton.tintColor = .appRed
-        
-        homeTableHeaderView.textButton.setTitle("Play All", for: .normal)
-        homeTableHeaderView.textButton.backgroundColor = UIColor.appRed
+        homeTableHeaderView.shareButton.addTarget(self, action: #selector(shareButtonWasTapped), for: .touchUpInside)
+        homeTableHeaderView.playAllButton.addTarget(self, action: #selector(playAllButtonWasTapped), for: .touchUpInside)
         
         homeTableHeaderView.translatesAutoresizingMaskIntoConstraints = false
         return homeTableHeaderView
@@ -60,9 +58,10 @@ class HomeViewController: ViewController {
 
     fileprivate let podcastTableViewCellID = "PodcastTableViewCellReuseIdentifier"
     fileprivate var homeTableHeaderViewLastY: CGFloat = 0
-    fileprivate let iconConfig = UIImage.SymbolConfiguration(pointSize: 23.0, weight: .bold)
     fileprivate var podcasts = [Podcast]()
     fileprivate var podcastStreamDelegate: PodcastStreamDelegate!
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,16 +73,7 @@ class HomeViewController: ViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         podcastStreamDelegate = podcastPlayerViewController
-        
-        let podcastManager = PodcastManager()
-        podcastManager.fetchPodcast(amount: 10) { (podcasts: [Podcast]?) in
-            DispatchQueue.main.async {
-                guard let podcasts = podcasts else { return }
-                self.podcasts.append(contentsOf: podcasts)
-                self.activityIndicatorView.isHidden = true
-                self.podcastsTableView.reloadData()
-            }
-        }
+        fetchPodcasts()
     }
     
     override func viewDidLayoutSubviews() {
@@ -91,19 +81,17 @@ class HomeViewController: ViewController {
         layoutViews()
     }
     
+    // MARK: - Setup
+    
     fileprivate func setupNavigationBar() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.navigationBar.barTintColor = .white
-        //navigationController?.navigationBar.shadowImage = UIColor.darkGray.as1ptImage()
-        //navigationController?.preferredStatusBarStyle = .darkContent
-        
         navigationItem.title = "Auby"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        
-        let shareBarButtonItem = UIBarButtonItem(image: .shareIcon, style: .plain, target: self, action: nil)
+        let shareIcon = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
+        let shareBarButtonItem = UIBarButtonItem(image: shareIcon, style: .plain, target: self, action: #selector(shareButtonWasTapped))
         shareBarButtonItem.tintColor = .appRed
         navigationItem.rightBarButtonItem = shareBarButtonItem
     }
+    
+    // MARK: - Layout
     
     fileprivate func layoutViews() {
         
@@ -128,8 +116,34 @@ class HomeViewController: ViewController {
         
         podcastsTableView.verticalScrollIndicatorInsets.top = homeTableHeaderView.frame.size.height
     }
+    
+    // MARK: - Private Methods
+    
+    fileprivate func fetchPodcasts() {
+        
+        let podcastManager = PodcastManager()
+        podcastManager.fetchPodcast(amount: 5) { (podcasts: [Podcast]?) in
+            DispatchQueue.main.async {
+                guard let podcasts = podcasts else { return }
+                self.podcasts.append(contentsOf: podcasts)
+                self.activityIndicatorView.isHidden = true
+                self.podcastsTableView.reloadData()
+            }
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @objc fileprivate func shareButtonWasTapped() {
+        print("Share button was tapped")
+    }
+    
+    @objc fileprivate func playAllButtonWasTapped() {
+        print("Play All button was tapped")
+    }
 }
 
+// MARK: - UITableViewDelegate
 extension HomeViewController: UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -151,6 +165,7 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension HomeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -187,6 +202,7 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - PodcastTableViewCellDelegate
 extension HomeViewController: PodcastTableViewCellDelegate {
     
     func podcastTableViewCellMoreButtonWasTapped(_ podcastTableViewCell: PodcastTableViewCell) {

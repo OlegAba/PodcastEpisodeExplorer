@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B6FB9B61377EC491A89FF20 /* Pods_PodcastEpisodeExplorer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52E79A84778051E1A685D76 /* Pods_PodcastEpisodeExplorer.framework */; };
+		7C0AE70C247CC40500FF41A2 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0AE70B247CC40500FF41A2 /* NavigationController.swift */; };
 		7C0B86C92478924F008DC345 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0B86C82478924F008DC345 /* AppDelegate.swift */; };
 		7C0B86CD2478924F008DC345 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0B86CC2478924F008DC345 /* ViewController.swift */; };
 		7C0B86D224789251008DC345 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C0B86D124789251008DC345 /* Assets.xcassets */; };
@@ -18,7 +19,6 @@
 		7C23E14324789FD000A13474 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C23E14224789FD000A13474 /* HomeViewController.swift */; };
 		7C3001782478D17000F9DD0F /* PodcastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3001772478D17000F9DD0F /* PodcastTableViewCell.swift */; };
 		7C30017A2478D2E600F9DD0F /* HomeTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3001792478D2E600F9DD0F /* HomeTableHeaderView.swift */; };
-		7C30017C2479187900F9DD0F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C30017B2479187900F9DD0F /* UIImage+.swift */; };
 		7C45FF8C247BAA1800FF15BC /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C45FF8B247BAA1800FF15BC /* Podcast.swift */; };
 		7C45FF8E247BAD0300FF15BC /* PodcastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C45FF8D247BAD0300FF15BC /* PodcastManager.swift */; };
 		7C593BA8247C606000883D98 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C593BA7247C606000883D98 /* System.swift */; };
@@ -30,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		252BF5D6F3B3FE612D920696 /* Pods-PodcastEpisodeExplorer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodcastEpisodeExplorer.release.xcconfig"; path = "Target Support Files/Pods-PodcastEpisodeExplorer/Pods-PodcastEpisodeExplorer.release.xcconfig"; sourceTree = "<group>"; };
+		7C0AE70B247CC40500FF41A2 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		7C0B86C52478924F008DC345 /* PodcastEpisodeExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastEpisodeExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C0B86C82478924F008DC345 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C0B86CC2478924F008DC345 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,7 +43,6 @@
 		7C23E14224789FD000A13474 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7C3001772478D17000F9DD0F /* PodcastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastTableViewCell.swift; sourceTree = "<group>"; };
 		7C3001792478D2E600F9DD0F /* HomeTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableHeaderView.swift; sourceTree = "<group>"; };
-		7C30017B2479187900F9DD0F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		7C45FF8B247BAA1800FF15BC /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		7C45FF8D247BAD0300FF15BC /* PodcastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastManager.swift; sourceTree = "<group>"; };
 		7C593BA7247C606000883D98 /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
@@ -123,6 +123,7 @@
 				7C0B86CC2478924F008DC345 /* ViewController.swift */,
 				7C23E14224789FD000A13474 /* HomeViewController.swift */,
 				7C593BA9247C644000883D98 /* PodcastPlayerViewController.swift */,
+				7C0AE70B247CC40500FF41A2 /* NavigationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -151,7 +152,6 @@
 			children = (
 				7C0B86E424789912008DC345 /* UIColor+.swift */,
 				7C23E14024789E7F00A13474 /* UIView+.swift */,
-				7C30017B2479187900F9DD0F /* UIImage+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -294,6 +294,7 @@
 				7C593BAA247C644000883D98 /* PodcastPlayerViewController.swift in Sources */,
 				7C45FF8C247BAA1800FF15BC /* Podcast.swift in Sources */,
 				7C0B86CD2478924F008DC345 /* ViewController.swift in Sources */,
+				7C0AE70C247CC40500FF41A2 /* NavigationController.swift in Sources */,
 				7C0B86C92478924F008DC345 /* AppDelegate.swift in Sources */,
 				7CBA46072479E64F006DA908 /* iTunesAPIEndpointRequest.swift in Sources */,
 				7C101EFA247B5C8D008E6FDB /* RSSFeedEndpointRequest.swift in Sources */,
@@ -302,7 +303,6 @@
 				7C3001782478D17000F9DD0F /* PodcastTableViewCell.swift in Sources */,
 				7CBA46092479FB78006DA908 /* EndpointRequest.swift in Sources */,
 				7CB7BC8F247C7056003037DE /* PodcastButtonsView.swift in Sources */,
-				7C30017C2479187900F9DD0F /* UIImage+.swift in Sources */,
 				7C0B86E524789912008DC345 /* UIColor+.swift in Sources */,
 				7C30017A2478D2E600F9DD0F /* HomeTableHeaderView.swift in Sources */,
 			);

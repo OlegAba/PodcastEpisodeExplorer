@@ -16,6 +16,8 @@ protocol PodcastStreamDelegate {
 
 class PodcastPlayerViewController: ViewController {
     
+    // MARK: - Private Properties
+    
     fileprivate lazy var gestureIndicatorView: UIView = {
         let view = UIView()
         view.backgroundColor = .darkGray
@@ -56,57 +58,30 @@ class PodcastPlayerViewController: ViewController {
     
     fileprivate lazy var podcastButtonsView: PodcastButtonsView = {
         let podcastButtonsView = PodcastButtonsView()
-        
-        podcastButtonsView.centerButton.setImage(playIconImage, for: .normal)
-        podcastButtonsView.centerButton.tintColor = .appRed
-        podcastButtonsView.centerButton.addTarget(self, action: #selector(playPauseButtonWasTapped), for: .touchUpInside)
-        
-        let skipIconConfig = UIImage.SymbolConfiguration(pointSize: 25.0, weight: .bold)
-        
-        let backwardsIcon = UIImage(systemName: "gobackward.15", withConfiguration: skipIconConfig)
-        podcastButtonsView.leftButton.setImage(backwardsIcon, for: .normal)
-        podcastButtonsView.leftButton.tintColor = .appRed
-        podcastButtonsView.leftButton.addTarget(self, action: #selector(skipBackwardsButtonWasTapped), for: .touchUpInside)
-        
-        let forwardIcon = UIImage(systemName: "goforward.30", withConfiguration: skipIconConfig)
-        podcastButtonsView.rightButton.setImage(forwardIcon, for: .normal)
-        podcastButtonsView.rightButton.tintColor = .appRed
-        podcastButtonsView.rightButton.addTarget(self, action: #selector(skipForwardButtonWasTapped), for: .touchUpInside)
-        
+        podcastButtonsView.playPauseButton.addTarget(self, action: #selector(playPauseButtonWasTapped), for: .touchUpInside)
+        podcastButtonsView.skipBackwardsButton.addTarget(self, action: #selector(skipBackwardsButtonWasTapped), for: .touchUpInside)
+        podcastButtonsView.skipForwardButton.addTarget(self, action: #selector(skipForwardButtonWasTapped), for: .touchUpInside)
         podcastButtonsView.translatesAutoresizingMaskIntoConstraints = false
         return podcastButtonsView
     }()
     
-    fileprivate lazy var playIconImage: UIImage? = {
-        let image = UIImage(systemName: "play.fill", withConfiguration: centerIconConfig)
-        return image
-    }()
-    
-    fileprivate lazy var pauseIconImage: UIImage? = {
-        let image = UIImage(systemName: "pause.fill", withConfiguration: centerIconConfig)
-        return image
-    }()
-    
-    fileprivate let centerIconConfig = UIImage.SymbolConfiguration(pointSize: 45.0, weight: .bold)
     fileprivate var isPlaying = false {
         didSet {
             if isPlaying {
                 SAPlayer.shared.play()
-                podcastButtonsView.centerButton.setImage(pauseIconImage, for: .normal)
+                podcastButtonsView.playPauseButton.setImage(podcastButtonsView.pauseIconImage, for: .normal)
             } else {
                 SAPlayer.shared.pause()
-                podcastButtonsView.centerButton.setImage(playIconImage, for: .normal)
+                podcastButtonsView.playPauseButton.setImage(podcastButtonsView.playIconImage, for: .normal)
             }
         }
     }
     
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(gestureIndicatorView)
-        view.addSubview(logoImageView)
-        view.addSubview(titleLabel)
-        view.addSubview(subtitleLabel)
-        view.addSubview(podcastButtonsView)
+        setupViews()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -118,6 +93,18 @@ class PodcastPlayerViewController: ViewController {
         super.viewDidLayoutSubviews()
         layoutViews()
     }
+    
+    // MARK: - Setup
+    
+    fileprivate func setupViews() {
+        view.addSubview(gestureIndicatorView)
+        view.addSubview(logoImageView)
+        view.addSubview(titleLabel)
+        view.addSubview(subtitleLabel)
+        view.addSubview(podcastButtonsView)
+    }
+    
+    // MARK: - Layout
     
     fileprivate func layoutViews() {
         
@@ -147,6 +134,8 @@ class PodcastPlayerViewController: ViewController {
         ])
     }
     
+    // MARK: - Actions
+    
     @objc fileprivate func playPauseButtonWasTapped() {
         isPlaying = !isPlaying
     }
@@ -160,6 +149,7 @@ class PodcastPlayerViewController: ViewController {
     }
 }
 
+// MARK: - PodcastStreamDelegate
 extension PodcastPlayerViewController: PodcastStreamDelegate {
     
     func update(ToPodcast podcast: Podcast) {
