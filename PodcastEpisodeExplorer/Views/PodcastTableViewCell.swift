@@ -15,6 +15,8 @@ protocol PodcastTableViewCellDelegate {
 
 class PodcastTableViewCell: UITableViewCell {
     
+    // MARK: - Internal Properties
+    
     lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -90,6 +92,8 @@ class PodcastTableViewCell: UITableViewCell {
     var delegate: PodcastTableViewCellDelegate!
     var logoImageUrl: String?
     
+    // MARK: - Lifetime
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -100,7 +104,9 @@ class PodcastTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupViews() {
+    // MARK: - Setup
+    
+    fileprivate func setupViews() {
         backgroundColor = .clear
         selectionStyle = .none
         addSubview(containerView)
@@ -112,7 +118,9 @@ class PodcastTableViewCell: UITableViewCell {
         containerView.addSubview(captionLabel)
     }
     
-    func layoutViews() {
+    // MARK: - Layout
+    
+    fileprivate func layoutViews() {
         
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: topAnchor),
@@ -148,6 +156,8 @@ class PodcastTableViewCell: UITableViewCell {
             captionLabel.trailingAnchor.constraint(equalTo: moreIconButton.leadingAnchor, constant:  -10.0),
         ])
     }
+    
+    // MARK: - Actions
 
     @objc fileprivate func moreButtonWasTapped() {
         delegate.podcastTableViewCellMoreButtonWasTapped(self)
@@ -156,6 +166,8 @@ class PodcastTableViewCell: UITableViewCell {
     @objc fileprivate func playPauseButtonWasTapped() {
         delegate.podcastTableViewCellPlayPauseButtonWasTapped(self)
     }
+    
+    // MARK: - Internal Methods
     
     func fetchImage(forUrl url: String) {
         
