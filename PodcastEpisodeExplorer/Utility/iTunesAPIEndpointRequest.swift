@@ -10,6 +10,7 @@ import Foundation
 
 class iTunesAPIEndpointRequest {
     
+    // NOTE: - Fetches current top 100 podcast artist ID's
     func getTopPodcastsIDs(completion: @escaping ([String]?) -> ()) {
         
         let urlString = "https://rss.itunes.apple.com/api/v1/us/podcasts/top-podcasts/all/100/explicit.json"
@@ -32,6 +33,7 @@ class iTunesAPIEndpointRequest {
         }
     }
     
+    // NOTE: - Fetches RSS feed url for artist ID
     func getRSSFeed(forArtistID artistID: String, completion: @escaping (String?) -> ()) {
         
         let urlString = "https://itunes.apple.com/lookup?id=\(artistID)"

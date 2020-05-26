@@ -17,6 +17,7 @@ class RSSFeedEndpointRequest {
         self.url = url
     }
     
+    // NOTE: - Fetches RSS feed from url and parses into Podcast object
     func fetchPodcast(completion: @escaping (Podcast?) -> ()) {
         
         guard let feedUrl = URL(string: url) else { completion(nil); return }
