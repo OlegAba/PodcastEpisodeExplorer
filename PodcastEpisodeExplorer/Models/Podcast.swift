@@ -10,6 +10,7 @@ import Foundation
 
 struct Podcast {
     let title: String
+    let episodeTitle: String
     let imageUrl: String
     let description: String
     let length: TimeInterval
