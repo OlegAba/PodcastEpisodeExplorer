@@ -122,6 +122,8 @@ class PodcastTableViewCell: UITableViewCell {
     
     fileprivate func layoutViews() {
         
+        let margin: CGFloat = 5.0
+        
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: topAnchor),
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -133,27 +135,27 @@ class PodcastTableViewCell: UITableViewCell {
             logoImageView.widthAnchor.constraint(equalToConstant: 55.0),
             logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor),
             
-            moreIconButton.topAnchor.constraint(equalTo: containerView.layoutMarginsGuide.topAnchor, constant: -5.0),
+            moreIconButton.topAnchor.constraint(equalTo: containerView.layoutMarginsGuide.topAnchor, constant: -margin),
             moreIconButton.trailingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.trailingAnchor),
             moreIconButton.heightAnchor.constraint(equalToConstant: moreIconButton.intrinsicContentSize.height),
             moreIconButton.widthAnchor.constraint(equalToConstant: moreIconButton.intrinsicContentSize.width),
             
-            playPauseIconButton.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor, constant: 5.0),
+            playPauseIconButton.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor, constant: margin),
             playPauseIconButton.trailingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.trailingAnchor),
             playPauseIconButton.heightAnchor.constraint(equalToConstant: playPauseIconButton.intrinsicContentSize.height),
             playPauseIconButton.widthAnchor.constraint(equalToConstant: playPauseIconButton.intrinsicContentSize.width),
             
             titleLabel.topAnchor.constraint(equalTo: containerView.layoutMarginsGuide.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10.0),
-            titleLabel.trailingAnchor.constraint(equalTo: moreIconButton.leadingAnchor, constant:  -10.0),
+            titleLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: margin * 2.0),
+            titleLabel.trailingAnchor.constraint(equalTo: moreIconButton.leadingAnchor, constant:  -(margin * 2.0)),
             
-            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10.0),
-            subtitleLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10.0),
-            subtitleLabel.trailingAnchor.constraint(equalTo: moreIconButton.leadingAnchor, constant:  -10.0),
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin * 2.0),
+            subtitleLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: margin * 2.0),
+            subtitleLabel.trailingAnchor.constraint(equalTo: moreIconButton.leadingAnchor, constant:  -(margin * 2.0)),
             
             captionLabel.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor),
-            captionLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10.0),
-            captionLabel.trailingAnchor.constraint(equalTo: moreIconButton.leadingAnchor, constant:  -10.0),
+            captionLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: margin * 2.0),
+            captionLabel.trailingAnchor.constraint(equalTo: moreIconButton.leadingAnchor, constant:  -(margin * 2.0)),
         ])
     }
     
