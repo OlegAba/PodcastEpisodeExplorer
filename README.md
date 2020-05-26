@@ -4,6 +4,7 @@ We use [CocoaPods](http://cocoapods.org) for our dependency manager. This should
 To access the project, run the following:
 ```
 git clone --recursive https://github.com/OlegAba/PodcastEpisodeExplorer.git
+cd PodcastEpisodeExplorer/
 pod install
 ```
 Make sure to open the Xcode workspace!
