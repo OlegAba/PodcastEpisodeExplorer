@@ -28,7 +28,7 @@ class HomeViewController: ViewController {
 
     fileprivate lazy var homeTableHeaderView: HomeTableHeaderView = {
         let homeTableHeaderView = HomeTableHeaderView()
-        homeTableHeaderView.titleLabel.text = "Your Auby for the day"
+        homeTableHeaderView.titleLabel.text = "Your Podcasts for the day"
         
         let date = Date()
         let dateformatter = DateFormatter()
